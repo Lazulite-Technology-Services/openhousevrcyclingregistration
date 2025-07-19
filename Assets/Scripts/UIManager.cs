@@ -106,23 +106,22 @@ public class UIManager : MonoBehaviour
         //    GameManager.instance.SaveUserNameToCSV("na");
 
         GameManager.instance.PlayerCount++;
-        
 
         if (playerName.text != string.Empty)
         {
-            //GameManager.instance.PlayerDetails += $"p{GameManager.instance.PlayerCount}/{playerName.text}-";
             GameManager.instance.PlayerDetailsList.Add($"{playerName.text}");
         }
         else
         {
-           //GameManager.instance.PlayerDetails += $"p{GameManager.instance.PlayerCount}/na-";
-            GameManager.instance.PlayerDetailsList.Add($"na");
+            GameManager.instance.PlayerDetailsList.Add($"p{GameManager.instance.PlayerCount}skip");
         }
-            playerName.text = string.Empty;
+        playerName.text = string.Empty;
 
+        Debug.Log(GameManager.instance.PlayerDetailsList[GameManager.instance.PlayerCount - 1]);
 
         if (isSingle)
-        {
+        {           
+
             GameManager.instance.PlayerDetails = GameManager.instance.PlayerDetailsList[0];
 
             //Send game start command
@@ -144,7 +143,7 @@ public class UIManager : MonoBehaviour
 
             if (GameManager.instance.PlayerCount == 2)
             {
-                GameManager.instance.PlayerDetails = $"{GameManager.instance.PlayerDetailsList[0]} - {GameManager.instance.PlayerDetailsList[1]}";
+                GameManager.instance.PlayerDetails = $"{GameManager.instance.PlayerDetailsList[0]}-{GameManager.instance.PlayerDetailsList[1]}";
 
                 submitButton.interactable = false;
                 skipButton.interactable = false;
